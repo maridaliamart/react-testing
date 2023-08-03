@@ -15,7 +15,9 @@ test('App should render', () => {
 
 test('Button should render', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+  render(<App />);
+  const themeButton = screen.getByRole('button', { name: /current theme: light/i });
+  expect(themeButton).toBeInTheDocument();
 });
 
 /**
