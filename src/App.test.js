@@ -39,7 +39,21 @@ test('theme button should update button text', () => {
 // e.g.: expect(element).toHaveStyle('color: #FFF');
 test('theme button should toggle styles', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+  render(<App />);
+  const themeButton = screen.getByRole('button', { name: /current theme: light/i });
+
+  const initialColor = getComputedStyle(document.body).color;
+  const initialBgColor = getComputedStyle(document.body).backgroundColor;
+
+  fireEvent.click(themeButton);
+
+  expect(document.body).toHaveStyle(`color: ${initialBgColor}`);
+  expect(document.body).toHaveStyle(`background-color: ${initialColor}`);
+
+  fireEvent.click(themeButton);
+
+  expect(document.body).toHaveStyle(`color: ${initialColor}`);
+  expect(document.body).toHaveStyle(`background-color: ${initialBgColor}`);
 });
 
 /**
